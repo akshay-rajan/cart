@@ -13,9 +13,9 @@
 ## Screenshots
 
 <div style="display:flex; justify-content: space-around;">
-   <img src="./screenshots/list.png" width="30%">
-   <img src="./screenshots/add.png" width="30%">
-   <img src="./screenshots/update.png" width="30%">
+   <img src="./screenshots/list.png" width="33%">
+   <img src="./screenshots/add.png" width="33%">
+   <img src="./screenshots/update.png" width="33%">
 </div>
 
 ## Setup
