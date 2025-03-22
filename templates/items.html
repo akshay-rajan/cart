@@ -1,0 +1,15 @@
+{% extends "index.html" %}
+
+{% block body %}
+
+<div class="container-fluid">
+  {% if items %}
+    {% for id, item in items %}
+      {% include 'item.html' %}
+    {% endfor %}
+  {% else %}
+    <h3 class="m-4">No items found.</h3>
+  {% endif %}
+</div>
+
+{% endblock %}

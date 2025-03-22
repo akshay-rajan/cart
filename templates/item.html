@@ -1,0 +1,15 @@
+<div class="m-4 border p-4">
+  <div class="d-flex justify-content-between">
+    
+    <h2>{{ item["name"] }}, <span class="text-muted fw-light"> by {{ item["brand"] }}</span></h2>
+
+    <div class="buttons-div">
+      <a href="/edit?id={{ id }}" class="btn"><i class="fas fa-edit"></i></a>
+      <a href="/delete/{{ id }}" class="btn text-danger"><i class="fa-solid fa-trash"></i></a>
+    </div>
+
+  </div>
+  <p>{{ item["description"] }}</p>
+  <p class="bg-yellow p-2 rounded"><b>Price: ${{ item["price"] }}</b></p>
+  <div class="fw-lighter text-end">ID: {{ id }}</div>
+</div>

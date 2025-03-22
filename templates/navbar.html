@@ -1,0 +1,28 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container d-flex justify-content-between">
+    <a class="navbar-brand" href="/">
+      <img src="{{ url_for('static', path='/cart.png') }}" alt="Cart" width="40" height="40" class="d-inline-block align-text-top">
+      Cart
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+      
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/items">All Items</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/create">Add</a>
+        </li>
+        
+        <form action="/search" method="post" class="d-flex justify-content-end ms-4" method="get">
+          <input type="search" name="id" class="form-control me-2" placeholder="Search item by ID..." aria-label="Search">
+          <button type="submit" class="btn btn-outline-light">Find</button>
+        </form>
+      </ul>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,11 @@
+{% extends "index.html" %}
+
+{% block body %}
+<div class="container-fluid">
+    {% if item %}
+        {% include 'item.html' %}
+    {% else %}
+        <h3 class="m-4">Item with ID {{ id }} not found!</h3>
+    {% endif %}
+</div>
+{% endblock %}
