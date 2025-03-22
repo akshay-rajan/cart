@@ -10,6 +10,14 @@
 - **CRUD Operations**: Create, read, update, and delete items in cart.
 - **Static File Serving**: Easily serve assets including CSS, JavaScript, and images via FastAPI.
 
+## Screenshots
+
+<div style="display:flex; justify-content: space-around;">
+   <img src="./screenshots/list.png" width="30%">
+   <img src="./screenshots/add.png" width="30%">
+   <img src="./screenshots/update.png" width="30%">
+</div>
+
 ## Setup
 
 1. **Clone the repository:**
