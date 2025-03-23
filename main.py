@@ -16,7 +16,7 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 def home(request: Request):
     return RedirectResponse(url="/items")
 
-@app.get("/items", response_model=List[Tuple[int, Item]])
+@app.get("/items", response_class=HTMLResponse)
 def get_items(request: Request):
     items_response = [(id, item) for id, item in items.items()]
     return templates.TemplateResponse("items.html", {
