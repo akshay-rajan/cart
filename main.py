@@ -2,7 +2,7 @@ from fastapi import FastAPI, HTTPException, Path, Body, status, Request, Form, Q
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import HTMLResponse, RedirectResponse
-from typing import List, Dict, Tuple, Optional
+from typing import List, Dict, Tuple, Optional, Annotated
 from models import Item
 from database import items
 
@@ -54,17 +54,10 @@ def create_item(request: Request):
 
 @app.post("/items", status_code=status.HTTP_201_CREATED)
 def add_item(
-    name: str = Form(...),
-    description: Optional[str] = Form(...),
-    price: float = Form(...),
-    brand: Optional[str] = Form(...)
+    item: Annotated[Item, Form(...)]
 ):
-    items[len(items) + 1] = {
-        "name": name,
-        "description": description,
-        "price": price,
-        "brand": brand
-    }
+    max_id = max(items.keys())
+    items[max_id + 1] = item.model_dump()
     return RedirectResponse(url="/items", status_code=status.HTTP_302_FOUND)
 
 @app.get("/edit", response_class=HTMLResponse)
