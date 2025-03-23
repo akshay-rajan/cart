@@ -2,6 +2,7 @@ from fastapi import FastAPI, HTTPException, Path, Body, status, Request, Form, Q
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import HTMLResponse, RedirectResponse
+from fastapi.encoders import jsonable_encoder
 from typing import List, Dict, Tuple, Optional, Annotated
 from models import Item
 from database import items
@@ -53,9 +54,7 @@ def create_item(request: Request):
     })
 
 @app.post("/items", status_code=status.HTTP_201_CREATED)
-def add_item(
-    item: Annotated[Item, Form(...)]
-):
+def add_item(item: Annotated[Item, Form(...)]):
     max_id = max(items.keys())
     items[max_id + 1] = item.model_dump()
     return RedirectResponse(url="/items", status_code=status.HTTP_302_FOUND)
@@ -80,11 +79,8 @@ def edit_item(request: Request, id: int = Query(...)):
 @app.post("/items/{id}")
 def update_item(
     request: Request, 
-    id: int = Path(..., ge=0), 
-    name: str = Form(None),
-    description: Optional[str] = Form(None),
-    price: float = Form(None),
-    brand: Optional[str] = Form(None)
+    item: Annotated[Item, Form(...)],
+    id: int = Path(..., ge=0)
 ):
     stored_item = items.get(id)
     if not stored_item:
@@ -95,15 +91,11 @@ def update_item(
             "title": "Sorry..."
         }, status_code=status.HTTP_404_NOT_FOUND)
     
-    new_item = {
-        id: {
-            "name": name or stored_item["name"],
-            "description": description or stored_item["description"],
-            "price": price or stored_item["price"],
-            "brand": brand or stored_item["brand"]
-        }
-    }
-    items.update(new_item)
+    # Merge the stored item with the new item
+    updated_item = stored_item.copy()
+    updated_item.update(item.model_dump())
+    items.update({id: updated_item})
+    
     return RedirectResponse(url="/items", status_code=status.HTTP_302_FOUND)
 
 @app.get("/delete/{id}", response_class=RedirectResponse)
