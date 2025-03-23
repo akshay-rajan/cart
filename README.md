@@ -52,7 +52,7 @@
 5. **Run the application:**
    
    ```bash
-   uvicorn main:app --reload
+   fastapi dev main.py
    ```
 
 ## Project Structure
